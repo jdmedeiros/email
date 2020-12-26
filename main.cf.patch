@@ -1,0 +1,36 @@
+--- /etc/postfix/main.cf        2020-12-26 17:25:11.968535781 +0000
++++ postfix/main.cf     2020-12-26 14:28:36.000000000 +0000
+@@ -24,8 +24,10 @@
+
+
+ # TLS parameters
+-smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+-smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
++smtpd_sasl_type=dovecot
++smtpd_sasl_path=private/auth
++smtpd_tls_cert_file=/etc/ssl/certs/amazonaws.com.crt
++smtpd_tls_key_file=/etc/ssl/private/amazonaws.com.key
+ smtpd_tls_security_level=may
+
+ smtp_tls_CApath=/etc/ssl/certs
+@@ -34,11 +36,10 @@
+
+
+ smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
+-myhostname = base.ec2.internal
++myhostname = postdov.ec2.internal
+ alias_maps = hash:/etc/aliases
+ alias_database = hash:/etc/aliases
+-myorigin = /etc/mailname
+-mydestination = ec2-52-73-187-194.compute-1.amazonaws.com, $myhostname, base, localhost.localdomain, localhost
++mydestination = ec2-52-73-187-194.compute-1.amazonaws.com, localhost.localdomain, localhost
+ relayhost =
+ mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+ mailbox_size_limit = 0
+@@ -46,3 +47,6 @@
+ inet_interfaces = all
+ inet_protocols = ipv4
+ html_directory = /usr/share/doc/postfix/html
++home_mailbox = Maildir/
++
++myorigin = /etc/mailname

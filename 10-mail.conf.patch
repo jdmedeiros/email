@@ -1,0 +1,18 @@
+--- /etc/dovecot/conf.d/10-mail.conf    2020-08-05 14:26:17.000000000 +0000
++++ dovecot/conf.d/10-mail.conf 2020-12-26 14:22:00.000000000 +0000
+@@ -21,13 +21,13 @@
+ #
+ # See doc/wiki/Variables.txt for full list. Some examples:
+ #
+-#   mail_location = maildir:~/Maildir
++mail_location = maildir:~/Maildir
+ #   mail_location = mbox:~/mail:INBOX=/var/mail/%u
+ #   mail_location = mbox:/var/mail/%d/%1n/%n:INDEX=/var/indexes/%d/%1n/%n
+ #
+ # <doc/wiki/MailLocation.txt>
+ #
+-mail_location = mbox:~/mail:INBOX=/var/mail/%u
++#mail_location = mbox:~/mail:INBOX=/var/mail/%u
+
+ # If you need to set multiple mailbox locations or want to change default
+ # namespace settings, you can do it by defining namespace sections.
