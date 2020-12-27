@@ -1,0 +1,51 @@
+--- exim4.conf.template_original        2020-12-27 22:56:27.422904629 +0000
++++ exim4.conf.template 2020-12-27 23:13:41.667314981 +0000
+@@ -1946,27 +1946,27 @@
+ 
+ # Authenticate against local passwords using sasl2-bin
+ # Requires exim_uid to be a member of sasl group, see README.Debian.gz
+-# plain_saslauthd_server:
+-#   driver = plaintext
+-#   public_name = PLAIN
+-#   server_condition = ${if saslauthd{{$auth2}{$auth3}}{1}{0}}
+-#   server_set_id = $auth2
+-#   server_prompts = :
+-#   .ifndef AUTH_SERVER_ALLOW_NOTLS_PASSWORDS
+-#   server_advertise_condition = ${if eq{$tls_in_cipher}{}{}{*}}
+-#   .endif
+-#
+-# login_saslauthd_server:
+-#   driver = plaintext
+-#   public_name = LOGIN
+-#   server_prompts = "Username:: : Password::"
+-#   # don't send system passwords over unencrypted connections
+-#   server_condition = ${if saslauthd{{$auth1}{$auth2}}{1}{0}}
+-#   server_set_id = $auth1
+-#   .ifndef AUTH_SERVER_ALLOW_NOTLS_PASSWORDS
+-#   server_advertise_condition = ${if eq{$tls_in_cipher}{}{}{*}}
+-#   .endif
+-#
++plain_saslauthd_server:
++  driver = plaintext
++  public_name = PLAIN
++  server_condition = ${if saslauthd{{$auth2}{$auth3}}{1}{0}}
++  server_set_id = $auth2
++  server_prompts = :
++  .ifndef AUTH_SERVER_ALLOW_NOTLS_PASSWORDS
++  server_advertise_condition = ${if eq{$tls_in_cipher}{}{}{*}}
++  .endif
++
++login_saslauthd_server:
++  driver = plaintext
++  public_name = LOGIN
++  server_prompts = "Username:: : Password::"
++  # don't send system passwords over unencrypted connections
++  server_condition = ${if saslauthd{{$auth1}{$auth2}}{1}{0}}
++  server_set_id = $auth1
++  .ifndef AUTH_SERVER_ALLOW_NOTLS_PASSWORDS
++  server_advertise_condition = ${if eq{$tls_in_cipher}{}{}{*}}
++  .endif
++
+ # ntlm_sasl_server:
+ #   driver = cyrus_sasl
+ #   public_name = NTLM
